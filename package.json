@@ -9,6 +9,9 @@
   "author": "McNester",
   "license": "MIT",
   "dependencies": {
-    "node-telegram-bot-api": "^0.65.1"
+    "node-telegram-bot-api": "^0.63.0"
+  },
+  "devDependencies": {
+    "ngrok": "^5.0.0-beta.2"
   }
 }
