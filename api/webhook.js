@@ -7,7 +7,7 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		let date = new Date(Date.now() + 5000); // 60,000 milliseconds = 1 minute
-		nodeSchedule.scheduleJob(date, async function() {
+		await nodeSchedule.scheduleJob(date, async function() {
 			await say(request);
 		});
 		/*

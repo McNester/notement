@@ -23,6 +23,7 @@ module.exports = {
 
 			// Send the initial message
 			bot.sendMessage(id, message, { parse_mode: 'Markdown' });
+			return 1;
 
 		}
 	}
