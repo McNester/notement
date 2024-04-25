@@ -3,7 +3,19 @@ const { startBot, say } = require('../bot');
 const nodeSchedule = require('node-schedule');
 // Schedule 'say' to be called every 10 minutes
 let lastRequest = null;
-
+nodeSchedule.scheduleJob('*/1 * * * *', async () => {
+	console.log('Executing scheduled task every 10 minutes');
+	console.info('here' + lastRequest)
+	if (lastRequest != null) {
+		try {
+			await say(lastRequest);
+		} catch (error) {
+			console.error('Error in scheduled say() execution:', error);
+		}
+	} else {
+		console.log('No user request stored yet.');
+	}
+});
 module.exports = async (request, response) => {
 	try {
 		// Store the chat ID and message
@@ -22,18 +34,6 @@ module.exports = async (request, response) => {
 	}
 	response.send('OK');
 	// Schedule 'say' to be called every 10 minutes with the last received message
-	await nodeSchedule.scheduleJob('*/1 * * * *', async () => {
-		console.log('Executing scheduled task every 10 minutes');
-		console.info('here' + lastRequest)
-		if (lastRequest != null) {
-			try {
-				await say(lastRequest);
-			} catch (error) {
-				console.error('Error in scheduled say() execution:', error);
-			}
-		} else {
-			console.log('No user request stored yet.');
-		}
-	});
+
 
 };
