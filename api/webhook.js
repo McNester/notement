@@ -1,11 +1,12 @@
 rocess.env.NTBA_FIX_319 = 'test';
 const TelegramBot = require('node-telegram-bot-api');
 
-//const { startBot } = require('../bot');
+const { startBot } = require('../bot');
 
 module.exports = async (request, response) => {
 	try {
-		//startBot();
+		startBot();
+		/*
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
 		if (body.message) {
@@ -13,6 +14,7 @@ module.exports = async (request, response) => {
 			const message = `✅ Thanks for your message: *"${text}"*\nHave a great day! 👋🏻`;
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 		}
+		*/
 	}
 	catch (error) {
 		console.error('Error sending message');
