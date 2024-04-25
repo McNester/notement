@@ -19,9 +19,8 @@ module.exports = {
 		const { body } = request;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
-			const message = `FIPI`;
-			await delay(2000)
-			// Send the initial message
+			const message = `Here is your fucking delay`;
+			await delay(60000)
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
