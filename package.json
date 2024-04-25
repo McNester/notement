@@ -1,15 +1,16 @@
 {
-  "name": "bot_tg",
+  "name": "notement",
   "version": "1.0.0",
-  "description": "This is the telegrom bot that keeps track of people you have meetings with",
-  "main": "bot.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "console.log('helooo')"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "McNester",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "node-telegram-bot-api": "^0.63.0"
+    "node-telegram-bot-api": "^0.65.1"
   },
   "devDependencies": {
     "ngrok": "^5.0.0-beta.2"

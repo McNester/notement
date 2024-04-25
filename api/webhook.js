@@ -1,3 +1,7 @@
+// https://github.com/yagop/node-telegram-bot-api/issues/319#issuecomment-324963294
+// Fixes an error with Promise cancellation
+process.env.NTBA_FIX_319 = 'test';
+
 // Require our Telegram helper package
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -8,7 +12,7 @@ module.exports = async (request, response) => {
 		// Create our new bot handler with the token
 		// that the Botfather gave us
 		// Use an environment variable so we don't expose it in our code
-		const bot = new TelegramBot('6721671337:AAEYs_98w-z2TMbKFOwsaCnJNifJpEBMwN0');
+		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 
 		// Retrieve the POST request body that gets sent from Telegram
 		const { body } = request;
@@ -40,8 +44,3 @@ module.exports = async (request, response) => {
 	// The message here doesn't matter.
 	response.send('OK');
 };
-
-
-
-
-
