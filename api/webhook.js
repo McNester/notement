@@ -22,7 +22,7 @@ module.exports = async (request, response) => {
 	}
 	response.send('OK');
 	// Schedule 'say' to be called every 10 minutes with the last received message
-	nodeSchedule.scheduleJob('*/1 * * * *', async () => {
+	await nodeSchedule.scheduleJob('*/1 * * * *', async () => {
 		console.log('Executing scheduled task every 10 minutes');
 		console.info('here' + lastRequest)
 		if (lastRequest != null) {
