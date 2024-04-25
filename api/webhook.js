@@ -1,7 +1,7 @@
 rocess.env.NTBA_FIX_319 = 'test';
 const TelegramBot = require('node-telegram-bot-api');
 
-const { startBot } = require('./bot');
+const { startBot } = require('../bot');
 
 module.exports = async (request, response) => {
 	try {
