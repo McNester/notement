@@ -25,13 +25,13 @@ module.exports = {
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
 			*/
-			say(id, 60000)
+			say(id, 60000, bot)
 
 		}
 	}
 }
 
-async function say(id, ms) {
+async function say(id, ms, bot) {
 	let promise = new Promise((resolve, reject) => {
 		setTimeout(() => resolve("готово!"), ms)
 	});
