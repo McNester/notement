@@ -1,4 +1,5 @@
 process.env.NTBA_FIX_319 = 'test';
+const nodeSchedule = require('node-schedule');
 const TelegramBot = require('node-telegram-bot-api');
 
 module.exports = {
@@ -25,7 +26,9 @@ module.exports = {
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
 			*/
-			await say(id, 60000, bot)
+			await nodeSchedule.scheduleJob(Date.now() + 60000, function() {
+				bot.sendMessage(chatId, "YEPP");
+			});
 
 		}
 	}
