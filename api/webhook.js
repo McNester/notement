@@ -1,5 +1,4 @@
 process.env.NTBA_FIX_319 = 'test';
-const TelegramBot = require('node-telegram-bot-api');
 
 const { startBot } = require('../bot');
 
