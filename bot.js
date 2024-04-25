@@ -20,8 +20,8 @@ module.exports = {
 		const { body } = request;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
-			const message = `Here is your fucking delay`;
-			await delay(5000)
+			const message = `delay 10000`;
+			await delay(10000)
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
