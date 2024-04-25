@@ -20,7 +20,10 @@ module.exports = {
 			};
 			const delayedMessage = `This is your delayed message after 5 minutes.`;
 
-			await this.timeout(60000);
+			// Call the timeout function directly from module.exports
+			await module.exports.timeout(60000); // 60,000 milliseconds = 1 minute
+
+
 			await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' })
 		}
 	}, timeout: async function(ms) {
