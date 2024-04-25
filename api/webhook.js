@@ -1,5 +1,4 @@
 process.env.NTBA_FIX_319 = 'test';
-
 const { startBot } = require('../bot');
 
 module.exports = async (request, response) => {
