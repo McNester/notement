@@ -5,7 +5,8 @@ const { startBot } = require('../bot');
 
 module.exports = async (request, response) => {
 	try {
-		startBot(request);
+
+		await startBot(request);
 		/*
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
