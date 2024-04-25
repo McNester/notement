@@ -18,8 +18,10 @@ module.exports = {
 				const delayedMessage = `This is your delayed message after 5 minutes.`;
 				await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 			};
+			const delayedMessage = `This is your delayed message after 5 minutes.`;
 
-			setTimeout(this.notify(id), 60000);
+			this.timeout();
+			await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' })
 		}
 	},
 	notify: async function(id) {
@@ -27,6 +29,8 @@ module.exports = {
 		await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 		consolo.log("something is odd")
 
+	}, timeout: function(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 }
 
