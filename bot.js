@@ -21,7 +21,7 @@ module.exports = {
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
 			const message = `Here is your fucking delay`;
-			await delay(60000)
+			await delay(5000)
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
