@@ -18,18 +18,26 @@ module.exports = {
 				const delayedMessage = `This is your delayed message after 5 minutes.`;
 				await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 			};
+			/*
 			const delayedMessage = `This is your delayed message after 5 minutes.`;
 			setTimeout(() => {
 				bot.sendMessage(id, 'Hello again! Here is your delayed message.');
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
+			*/
+			say(id, 60000)
 
 		}
 	}
 }
 
-async function say(id) {
+async function say(id, ms) {
+	let promise = new Promise((resolve, reject) => {
+		setTimeout(() => resolve("готово!"), ms)
+	});
+
 	const delayedMessage = `From delay`;
 	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
+
 }
 
