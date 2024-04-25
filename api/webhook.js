@@ -1,10 +1,14 @@
 process.env.NTBA_FIX_319 = 'test';
-const { startBot } = require('../bot');
+const { startBot, say } = require('../bot');
+const nodeSchedule = require('node-schedule');
 
 module.exports = async (request, response) => {
 	try {
 
 		await startBot(request);
+		nodeSchedule.scheduleJob(Date.now() + 60000, function() {
+			await.say(request)
+		});
 		/*
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
