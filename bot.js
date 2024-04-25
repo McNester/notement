@@ -4,7 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 module.exports = {
 
 	startBot: async function(request) {
-		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
+		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;

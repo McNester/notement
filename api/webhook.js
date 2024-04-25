@@ -3,7 +3,9 @@ const { startBot, say } = require('../bot');
 const nodeSchedule = require('node-schedule');
 // Schedule 'say' to be called every 10 minutes
 let lastRequest = null;
-nodeSchedule.scheduleJob('*/1 * * * *', async () => {
+
+//nodeSchedule.scheduleJob('*/1 * * * *', async () => {
+/*
 	console.log('Executing scheduled task every 10 minutes');
 	console.info('here' + lastRequest)
 	if (lastRequest != null) {
@@ -15,7 +17,9 @@ nodeSchedule.scheduleJob('*/1 * * * *', async () => {
 	} else {
 		console.log('No user request stored yet.');
 	}
+
 });
+*/
 module.exports = async (request, response) => {
 	try {
 		// Store the chat ID and message
