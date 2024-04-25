@@ -19,9 +19,14 @@ module.exports = {
 				await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 			};
 
-			await new Promise(resolve => setTimeout(resolve, 60000)); // Wait for 5 minutes
-			await sendDelayedMessage(); // Send the delayed message
+			setTimeout(this.notify(id), 60000);
 		}
+	},
+	notify: async function(id) {
+		const message = `From notification,congrats`
+		await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
+		consolo.log("something is odd")
+
 	}
 }
 
