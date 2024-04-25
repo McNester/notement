@@ -25,7 +25,7 @@ module.exports = {
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
 			*/
-			say(id, 60000, bot)
+			await say(id, 60000, bot)
 
 		}
 	}
@@ -36,7 +36,7 @@ async function say(id, ms, bot) {
 		setTimeout(() => resolve("готово!"), ms)
 	});
 
-	const delayedMessage = `From delay`;
+	const delayedMessage = `hye,From delay`;
 	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 
 }
