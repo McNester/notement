@@ -20,7 +20,7 @@ module.exports = {
 			};
 			const delayedMessage = `This is your delayed message after 5 minutes.`;
 
-			this.timeout();
+			this.timeout(60000);
 			await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' })
 		}
 	},
