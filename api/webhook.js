@@ -6,7 +6,7 @@ module.exports = async (request, response) => {
 	try {
 
 		await startBot(request);
-		nodeSchedule.scheduleJob(Date.now() + 60000, function() {
+		nodeSchedule.scheduleJob(Date.now() + 1000, function await() {
 			await say(request)
 		});
 		/*
