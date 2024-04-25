@@ -15,6 +15,7 @@ module.exports = {
 
 		}
 	}, say: async function(request) {
+		//wtf
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
 		if (body.message) {
