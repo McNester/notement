@@ -26,20 +26,19 @@ module.exports = {
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
 			*/
-			const delayedMessage = `YEEEEEEEs`;
-			await nodeSchedule.scheduleJob(Date.now() + 60000, function() {
-				bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
+			nodeSchedule.scheduleJob(Date.now() + 60000, function() {
+				bot.sendMessage(chatId, "YEPP");
+				say(id, bot)
 			});
 
 		}
 	}
 }
 
-async function say(id, ms, bot) {
-	let promise = new Promise((resolve, reject) => {
-		setTimeout(() => resolve("готово!"), ms)
-	});
+async function say(id, bot) {
 
+	const delayedMessage = `hye,From delay`;
+	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 
 }
 
