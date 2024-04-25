@@ -4,7 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 module.exports = {
 
 	startBot: async function(request) {
-		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN, { polling: true });
+		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
@@ -14,15 +14,15 @@ module.exports = {
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
-	}, say: async function(request) {
+	}, say: function(request) {
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
-			const message = `FIPI`;
+			const message = `FUCK`;
 
 			// Send the initial message
-			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
+			bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
 	}
