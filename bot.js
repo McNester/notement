@@ -35,9 +35,10 @@ async function say(id, ms, bot) {
 	let promise = new Promise((resolve, reject) => {
 		setTimeout(() => resolve("готово!"), ms)
 	});
+	await promise;
 
 	const delayedMessage = `hye,From delay`;
-	bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
+	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 
 }
 
