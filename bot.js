@@ -22,9 +22,14 @@ module.exports = {
 			setTimeout(() => {
 				bot.sendMessage(id, 'Hello again! Here is your delayed message.');
 			}, 60000); // 60000 milliseconds = 1 minute
-			// Call the timeout function directly from module.exports
+			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
+
 		}
 	}
 }
 
+async function say(id) {
+	const delayedMessage = `From delay`;
+	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
+}
 
