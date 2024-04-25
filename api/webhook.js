@@ -6,8 +6,9 @@ module.exports = async (request, response) => {
 	try {
 
 		await startBot(request);
-		await nodeSchedule.scheduleJob(Date.now() + 60000, async function() {
-			await say(request)
+		let date = new Date(Date.now() + 10000); // 60,000 milliseconds = 1 minute
+		nodeSchedule.scheduleJob(date, async function() {
+			await say(request);
 		});
 		/*
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
