@@ -26,7 +26,7 @@ module.exports = {
 			}, 60000); // 60000 milliseconds = 1 minute
 			setTimeout(say(id), 60000); // 60000 milliseconds = 1 minute
 			*/
-			nodeSchedule.scheduleJob(Date.now() + 60000, function() {
+			await nodeSchedule.scheduleJob(Date.now() + 10000, function() {
 				say(id, bot)
 			});
 
