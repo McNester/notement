@@ -1,28 +1,21 @@
 process.env.NTBA_FIX_319 = 'test';
 const { startBot, say } = require('../bot');
 const nodeSchedule = require('node-schedule');
+// Schedule 'say' to be called every 10 minutes
+nodeSchedule.scheduleJob('*/10 * * * *', function() {
+	console.log('Executing scheduled task every 10 minutes');
+	// Ensure the `say()` function is called correctly with necessary parameters
+	say();
+});
+let lastRequest = null;
 
 module.exports = async (request, response) => {
 	try {
+		// Store the chat ID and message
+		lastRequest = request;
 
 		await startBot(request);
-		await say(request);
-		//wtf
-		/*
-		let date = new Date(Date.now() + 5000); // 60,000 milliseconds = 1 minute
-		await nodeSchedule.scheduleJob(date, async function() {
-			await say(request);
-		});
-		*/
-		/*
-		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
-		const { body } = request;
-		if (body.message) {
-			const { chat: { id }, text } = body.message;
-			const message = `✅ Thanks for your message: *"${text}"*\nHave a great day! 👋🏻`;
-			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
-		}
-		*/
+		await say(request);  // Direct reply	}
 	}
 	catch (error) {
 		console.error('Error sending message');
@@ -33,4 +26,18 @@ module.exports = async (request, response) => {
 		console.log(process.env.VERCEL.TELEGRAM_TOKEN);
 	}
 	response.send('OK');
+	// Schedule 'say' to be called every 10 minutes with the last received message
+	nodeSchedule.scheduleJob('*/3 * * * *', async () => {
+		console.log('Executing scheduled task every 10 minutes');
+		if (lastRequest != null) {
+			try {
+				await say(lastRequest);
+			} catch (error) {
+				console.error('Error in scheduled say() execution:', error);
+			}
+		} else {
+			console.log('No user request stored yet.');
+		}
+	});
+
 };
