@@ -37,6 +37,9 @@ module.exports = async (request, response) => {
 		// can log it into the Vercel console
 		console.error('Error sending message');
 		console.log(error.toString());
+		console.log(process.env.TELEGRAM_TOKEN);
+		console.log(process.env.VERCEL_ENV.TELEGRAM_TOKEN);
+		console.log(process.env.VERCEL.TELEGRAM_TOKEN);
 	}
 
 	// Acknowledge the message with Telegram
