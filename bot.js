@@ -37,7 +37,7 @@ module.exports = {
 async function say(id, bot) {
 
 	const delayedMessage = `hye,From delay`;
-	await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
+	bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' });
 
 }
 
