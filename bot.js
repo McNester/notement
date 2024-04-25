@@ -20,16 +20,10 @@ module.exports = {
 			};
 			const delayedMessage = `This is your delayed message after 5 minutes.`;
 
-			this.timeout(60000);
+			await this.timeout(60000);
 			await bot.sendMessage(id, delayedMessage, { parse_mode: 'Markdown' })
 		}
-	},
-	notify: async function(id) {
-		const message = `From notification,congrats`
-		await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
-		consolo.log("something is odd")
-
-	}, timeout: function(ms) {
+	}, timeout: async function(ms) {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 }
