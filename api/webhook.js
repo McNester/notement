@@ -38,6 +38,7 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		await say(request);  // Direct reply	}
+		await job.start;
 	}
 	catch (error) {
 		console.error('Error sending message');
