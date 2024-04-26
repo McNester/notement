@@ -38,7 +38,9 @@ app.listen(PORT, () => {
 
 module.exports = async (request, response) => {
 	try {
-		if (request.body.triggerSource && request.body.triggerSource === 'trig') {
+		const { test_trigger } = request.body;
+
+		if (test_trigger) {
 			console.log('Triggered manually for testing:');
 			await say(lastRequest)
 		} else {
