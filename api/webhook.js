@@ -19,12 +19,12 @@ module.exports = async (request, response) => {
 		const triggeredFrom = request.body.source;
 		const timestamp = request.body.timestamp;
 		if (triggeredFrom === 'triggerNextRun') {
-			say(lastRequest)
+			await say(lastRequest)
 			console.log(`Function was triggered from ${triggeredFrom} at ${timestamp}.`);
 		} else {
 			lastRequest = request;
 			await startBot(request);
-			say(request);  // Direct reply	}
+			await say(request);  // Direct reply	}
 		}
 		//triggerNextRun();
 
