@@ -1,39 +1,7 @@
 process.env.NTBA_FIX_319 = 'test';
 const { startBot, say } = require('../bot');
-const nodeSchedule = require('node-schedule');
-const { CronJob } = require('cron');
-// Schedule 'say' to be called every 10 minutes
+const axios = require('axios'); // Ensure axios is installed via npm
 let lastRequest = null;
-//const job = new CronJob('*/1 * * * *', async function() {
-/*
-	console.log('Checking if scheduler should execute...');
-	try {
-		console.log('Executing scheduled task...');
-		await say(lastRequest);
-		console.info(lastRequest);
-	} catch (error) {
-		console.error('Error in scheduled say() execution:', error);
-	}
-}, null, true, 'America/New_York'); // Replace 'America/New_York' with your time zone
-*/
-
-//nodeSchedule.scheduleJob('*/1 * * * *', async () => {
-/*
-	console.log('Executing scheduled task every 10 minutes');
-	console.info('here' + lastRequest)
-	if (lastRequest != null) {
-		try {
-			await say(lastRequest);
-		} catch (error) {
-			console.error('Error in scheduled say() execution:', error);
-		}
-	} else {
-		console.log('No user request stored yet.');
-	}
-
-});
-*/
-//job.start();
 const timeoutThreshold = 4000; // 10 seconds
 async function waitUntil(condition) {
 	return await new Promise(resolve => {
@@ -45,21 +13,42 @@ async function waitUntil(condition) {
 		}, 4000);
 	});
 }
+async function triggerNextRun() {
+	setTimeout(async () => {
+		try {
+			console.log("Triggering the next function run...");
+			// Define the data to send
+			const postData = {
+				triggered: true,
+				timestamp: new Date().toISOString(),  // Example: include a timestamp
+				source: 'triggerNextRun'  // Indicate the source of the trigger
+			};
+
+			// Call the function URL itself with POST data
+			const result = await axios.post('https://notement.vercel.app/api/webhook', postData);
+			console.log("Function re-triggered successfully:", result.data);
+		} catch (error) {
+			console.error("Error re-triggering function:", error);
+		}
+	}, 60000); // Delay for 60 seconds before re-invoking
+}
 module.exports = async (request, response) => {
-	const timer = setTimeout(() => {
-		console.log('Preemptive response to avoid 504 Timeout');
-		response.status(202).send('Processing...'); // Respond with 202 Accepted as processing continues
-	}, timeoutThreshold);
-
 	try {
+		const triggeredFrom = request.body.source;
+		const timestamp = request.body.timestamp;
+		if (triggeredFrom === 'triggerNextRun') {
+			await say(lastRequest)
+			say(lastRequest)
+			console.log(`Function was triggered from ${triggeredFrom} at ${timestamp}.`);
+		} else {
+			lastRequest = request;
+			await startBot(request);
+			say(request);  // Direct reply	}
+		}
+		await triggerNextRun();
 
-		// Store the chat ID and message
-		lastRequest = request;
-
-		await startBot(request);
-		say(request);  // Direct reply	}
 		//let timerId = setInterval(await say(request), 2000);
-		await waitUntil(lastRequest == null)
+		//await waitUntil(lastRequest == null)
 	}
 	catch (error) {
 		console.error('Error sending message');
