@@ -31,6 +31,7 @@ const job = new CronJob('*/1 * * * *', async function() {
 
 });
 */
+job.start();
 module.exports = async (request, response) => {
 	try {
 		// Store the chat ID and message
@@ -38,7 +39,6 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		await say(request);  // Direct reply	}
-		await job.start;
 	}
 	catch (error) {
 		console.error('Error sending message');
