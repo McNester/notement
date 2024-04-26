@@ -27,6 +27,7 @@ module.exports = {
 
 		}
 	}, check: async function(request) {
+		console.log('in check:' + request)
 		//wtf
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
