@@ -34,7 +34,7 @@ let lastRequest = null;
 });
 */
 //job.start();
-const timeoutThreshold = 10000; // 10 seconds
+const timeoutThreshold = 4000; // 10 seconds
 async function waitUntil(condition) {
 	return await new Promise(resolve => {
 		const interval = setInterval(() => {
