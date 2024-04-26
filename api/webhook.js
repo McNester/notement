@@ -26,6 +26,9 @@ cron.schedule('* * * * *', async () => {
 */
 module.exports = async (request, response) => {
 	try {
+		if (!request || !request.body) {
+			throw new Error('Request or request body is null.');
+		}
 		const test_trigger = request.body.test_trigger;
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
