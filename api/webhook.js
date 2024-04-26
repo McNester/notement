@@ -4,7 +4,8 @@ const nodeSchedule = require('node-schedule');
 const { CronJob } = require('cron');
 // Schedule 'say' to be called every 10 minutes
 let lastRequest = null;
-const job = new CronJob('*/1 * * * *', async function() {
+//const job = new CronJob('*/1 * * * *', async function() {
+/*
 	console.log('Checking if scheduler should execute...');
 	try {
 		console.log('Executing scheduled task...');
@@ -14,6 +15,7 @@ const job = new CronJob('*/1 * * * *', async function() {
 		console.error('Error in scheduled say() execution:', error);
 	}
 }, null, true, 'America/New_York'); // Replace 'America/New_York' with your time zone
+*/
 
 //nodeSchedule.scheduleJob('*/1 * * * *', async () => {
 /*
@@ -31,7 +33,7 @@ const job = new CronJob('*/1 * * * *', async function() {
 
 });
 */
-job.start();
+//job.start();
 module.exports = async (request, response) => {
 	try {
 		// Store the chat ID and message
@@ -39,6 +41,7 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		await say(request);  // Direct reply	}
+		let timerId = setInterval(say(request), 2000);
 	}
 	catch (error) {
 		console.error('Error sending message');
