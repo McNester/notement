@@ -1,5 +1,6 @@
 process.env.NTBA_FIX_319 = 'test';
 const TelegramBot = require('node-telegram-bot-api');
+const axios = require('axios'); // Ensure axios is installed via npm
 
 module.exports = {
 	startBot: async function(request) {
