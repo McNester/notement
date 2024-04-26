@@ -26,6 +26,17 @@ module.exports = {
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
+	}, check: async function(request) {
+		//wtf
+		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
+		const { body } = request;
+		if (body.message) {
+			const { chat: { id }, text } = body.message;
+			const message = `finally)`;
+			//await delay(5000)
+			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
+
+		}
 	}
 }
 function delay(ms) {
@@ -66,5 +77,5 @@ async function triggerNextRun() {
 		} catch (error) {
 			console.error('Failed to trigger webhook:', error);
 		}
-	}, 3000); // Delay for 60 seconds before re-invoking
+	}, 10000); // Delay for 60 seconds before re-invoking
 }

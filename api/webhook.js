@@ -1,5 +1,5 @@
 process.env.NTBA_FIX_319 = 'test';
-const { startBot, say } = require('../bot');
+const { startBot, say, check } = require('../bot');
 let lastRequest = null;
 const express = require('express');
 const app = express();
@@ -42,7 +42,7 @@ module.exports = async (request, response) => {
 
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
-			await say(lastRequest)
+			await check(lastRequest)
 		} else {
 			lastRequest = request;
 			await startBot(request);
