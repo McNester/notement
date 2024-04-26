@@ -17,8 +17,12 @@ async function waitUntil(condition) {
 }
 module.exports = async (request, response) => {
 	try {
-		const { test_trigger } = request.body;
+		//const { test_trigger } = request.body;
+		lastRequest = request;
+		await startBot(request);
+		await say(request);
 
+		/*
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
 			check()
@@ -27,6 +31,13 @@ module.exports = async (request, response) => {
 			await startBot(request);
 			await say(request);
 		}
+		*/
+		cron.schedule('* * * * *', async () => {
+			console.log('Running a task every minute');
+			const message = `hippui`;
+			await say(lastRequest)
+			// Place your task logic here
+		});
 		//triggerNextRun();
 
 		//let timerId = setInterval(await say(request), 2000);
