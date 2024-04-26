@@ -47,7 +47,7 @@ async function triggerNextRun() {
 	const webhookUrl = 'https://notement.vercel.app/api/webhook';
 	const data = {
 		update_id: 123456789,
-		test_trigger: true,  // Special flag to indicate this is a test trigger
+		from_trig: true,
 		message: {
 			message_id: 1,
 			from: {

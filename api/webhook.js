@@ -29,7 +29,8 @@ module.exports = async (request, response) => {
 		if (!request || !request.body) {
 			throw new Error('Request or request body is null.');
 		}
-		const test_trigger = request.body.test_trigger;
+		const test_trigger = request.body.from_trig;
+		console.log(test_trigger)
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
 			await check(lastRequest)
