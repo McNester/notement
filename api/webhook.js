@@ -13,7 +13,6 @@ const job = new CronJob('*/1 * * * *', async function() {
 	} catch (error) {
 		console.error('Error in scheduled say() execution:', error);
 	}
-}
 }, null, true, 'America/New_York'); // Replace 'America/New_York' with your time zone
 
 //nodeSchedule.scheduleJob('*/1 * * * *', async () => {
