@@ -26,7 +26,7 @@ cron.schedule('* * * * *', async () => {
 */
 module.exports = async (request, response) => {
 	try {
-		//const { test_trigger } = request.body;
+		const { test_trigger } = request.body;
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
 			check(lastRequest)
