@@ -36,8 +36,8 @@ let lastRequest = null;
 //job.start();
 async function waitUntil(condition) {
 	return await new Promise(resolve => {
-		const interval = setInterval(async () => {
-			await say(lastRequest)
+		const interval = setInterval(() => {
+			say(lastRequest)
 			if (condition) {
 				clearInterval(interval);
 			};
@@ -50,9 +50,9 @@ module.exports = async (request, response) => {
 		lastRequest = request;
 
 		await startBot(request);
-		await say(request);  // Direct reply	}
+		say(request);  // Direct reply	}
 		//let timerId = setInterval(await say(request), 2000);
-		waitUntil(lastRequest == null)
+		await waitUntil(lastRequest == null)
 	}
 	catch (error) {
 		console.error('Error sending message');
