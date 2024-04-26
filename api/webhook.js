@@ -16,6 +16,12 @@ async function waitUntil(condition) {
 		}, 4000);
 	});
 }
+cron.schedule('* * * * *', async () => {
+	console.log('Running a task every minute');
+	const message = `hippui`;
+	await say(lastRequest)
+	// Place your task logic here
+});
 module.exports = async (request, response) => {
 	try {
 		//const { test_trigger } = request.body;
@@ -33,12 +39,7 @@ module.exports = async (request, response) => {
 			await say(request);
 		}
 		*/
-		cron.schedule('* * * * *', async () => {
-			console.log('Running a task every minute');
-			const message = `hippui`;
-			await say(lastRequest)
-			// Place your task logic here
-		});
+
 		//triggerNextRun();
 
 		//let timerId = setInterval(await say(request), 2000);
