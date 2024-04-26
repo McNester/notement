@@ -13,31 +13,12 @@ async function waitUntil(condition) {
 		}, 4000);
 	});
 }
-async function triggerNextRun() {
-	setTimeout(async () => {
-		try {
-			console.log("Triggering the next function run...");
-			// Define the data to send
-			const postData = {
-				triggered: true,
-				timestamp: new Date().toISOString(),  // Example: include a timestamp
-				source: 'triggerNextRun'  // Indicate the source of the trigger
-			};
 
-			// Call the function URL itself with POST data
-			const result = await axios.post('https://notement.vercel.app/api/webhook', postData);
-			console.log("Function re-triggered successfully:", result.data);
-		} catch (error) {
-			console.error("Error re-triggering function:", error);
-		}
-	}, 60000); // Delay for 60 seconds before re-invoking
-}
 module.exports = async (request, response) => {
 	try {
 		const triggeredFrom = request.body.source;
 		const timestamp = request.body.timestamp;
 		if (triggeredFrom === 'triggerNextRun') {
-			await say(lastRequest)
 			say(lastRequest)
 			console.log(`Function was triggered from ${triggeredFrom} at ${timestamp}.`);
 		} else {
@@ -45,7 +26,7 @@ module.exports = async (request, response) => {
 			await startBot(request);
 			say(request);  // Direct reply	}
 		}
-		triggerNextRun();
+		//triggerNextRun();
 
 		//let timerId = setInterval(await say(request), 2000);
 		//await waitUntil(lastRequest == null)
