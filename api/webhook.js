@@ -52,7 +52,7 @@ module.exports = async (request, response) => {
 		await startBot(request);
 		say(request);  // Direct reply	}
 		//let timerId = setInterval(await say(request), 2000);
-		await waitUntil(lastRequest == null)
+		waitUntil(lastRequest == null)
 	}
 	catch (error) {
 		console.error('Error sending message');
