@@ -29,7 +29,7 @@ module.exports = async (request, response) => {
 		const { test_trigger } = request.body;
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
-			check(lastRequest)
+			await check(lastRequest)
 		} else {
 			lastRequest = request;
 			await startBot(request);
