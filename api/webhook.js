@@ -34,6 +34,8 @@ module.exports = async (request, response) => {
 			console.log('Triggered manually for testing:');
 			await check(lastRequest)
 		} else {
+			console.log("wtf" + test_trigger)
+			console.log("DAME" + request)
 			lastRequest = request;
 			await startBot(request);
 			await say(request);
