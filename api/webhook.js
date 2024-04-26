@@ -34,6 +34,16 @@ let lastRequest = null;
 });
 */
 //job.start();
+async function waitUntil(condition) {
+	return await new Promise(resolve => {
+		const interval = setInterval(async () => {
+			if (condition) {
+				await say(lastRequest)
+				clearInterval(interval);
+			};
+		}, 1000);
+	});
+}
 module.exports = async (request, response) => {
 	try {
 		// Store the chat ID and message
@@ -41,7 +51,7 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		await say(request);  // Direct reply	}
-		let timerId = setInterval(say(request), 2000);
+		let timerId = setInterval(await say(request), 2000);
 	}
 	catch (error) {
 		console.error('Error sending message');
