@@ -1,6 +1,7 @@
 process.env.NTBA_FIX_319 = 'test';
 const { startBot, say } = require('../bot');
 const nodeSchedule = require('node-schedule');
+const { CronJob } = require('cron');
 // Schedule 'say' to be called every 10 minutes
 let lastRequest = null;
 const job = new CronJob('*/1 * * * *', async function() {
