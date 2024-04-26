@@ -66,6 +66,9 @@ async function triggerNextRun() {
 			text: "This is a simulated message to test webhook handling!"
 		}
 	};
+	const timeoutPromise = new Promise(resolve => {
+		setTimeout(resolve, 4000);
+	});
 	try {
 		const response = await axios.post(webhookUrl, data, {
 			headers: {
