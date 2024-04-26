@@ -9,7 +9,7 @@ module.exports = {
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
 			const message = `Hey!`;
-			triggerNextRun()
+			await triggerNextRun()
 
 			// Send the initial message
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
@@ -48,5 +48,5 @@ async function triggerNextRun() {
 		} catch (error) {
 			console.error("Error re-triggering function:", error);
 		}
-	}, 60000); // Delay for 60 seconds before re-invoking
+	}, 3000); // Delay for 60 seconds before re-invoking
 }
