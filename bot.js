@@ -1,7 +1,7 @@
 process.env.NTBA_FIX_319 = 'test';
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios'); // Ensure axios is installed via npm
-
+let lastReq = null;
 module.exports = {
 	startBot: async function(request) {
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
@@ -13,7 +13,7 @@ module.exports = {
 
 			// Send the initial message
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
-
+			lastReq = request
 		}
 	}, say: async function(request) {
 		//wtf
@@ -26,10 +26,10 @@ module.exports = {
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
-	}, check: function(request) {
+	}, check: function() {
 		//wtf
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
-		const { body } = request;
+		const { body } = lastReq;
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
 			const message = `finally)`;

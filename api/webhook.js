@@ -15,38 +15,17 @@ async function waitUntil(condition) {
 		}, 4000);
 	});
 }
-
-app.post('/api/webhook', async (req, res) => {
-	const { test_trigger, message } = req.body;
-
-	if (test_trigger) {
-		console.log('Received a test webhook trigger:', message);
-		await say(lastRequest)
-		// Handle test logic or respond differently
-		res.status(200).send('Test webhook processed successfully.');
-	} else {
-		console.log('Received a real Telegram message:', message);
-		// Process the message as you would in production
-		res.status(200).send('Telegram webhook processed successfully.');
-	}
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}`);
-});
-
 module.exports = async (request, response) => {
 	try {
 		const { test_trigger } = request.body;
 
 		if (test_trigger) {
 			console.log('Triggered manually for testing:');
-			await check(lastRequest)
+			check()
 		} else {
 			lastRequest = request;
 			await startBot(request);
-			await say(request);  // Direct reply	}
+			await say(request);
 		}
 		//triggerNextRun();
 
