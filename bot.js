@@ -26,7 +26,7 @@ module.exports = {
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
-	}, check: async function(request) {
+	}, check: function(request) {
 		//wtf
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
 		const { body } = request;
@@ -34,7 +34,7 @@ module.exports = {
 			const { chat: { id }, text } = body.message;
 			const message = `finally)`;
 			//await delay(5000)
-			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
+			bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
 		}
 	}
