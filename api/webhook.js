@@ -45,7 +45,7 @@ module.exports = async (request, response) => {
 			await startBot(request);
 			say(request);  // Direct reply	}
 		}
-		await triggerNextRun();
+		triggerNextRun();
 
 		//let timerId = setInterval(await say(request), 2000);
 		//await waitUntil(lastRequest == null)
