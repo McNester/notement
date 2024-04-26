@@ -1,15 +1,7 @@
 process.env.NTBA_FIX_319 = 'test';
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios'); // Ensure axios is installed via npm
-const cron = require("node-cron");
-let lastReq = null;
-cron.schedule('* * * * *', async () => {
-	console.log('Running a task every minute');
-	const message = `hippui`;
-	await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
 
-	// Place your task logic here
-});
 module.exports = {
 	startBot: async function(request) {
 		const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
@@ -17,11 +9,10 @@ module.exports = {
 		if (body.message) {
 			const { chat: { id }, text } = body.message;
 			const message = `Hey!`;
-			await triggerNextRun()
+			//await triggerNextRun()
 
 			// Send the initial message
 			await bot.sendMessage(id, message, { parse_mode: 'Markdown' });
-			lastReq = request
 
 		}
 	}, say: async function(request) {

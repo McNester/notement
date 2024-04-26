@@ -2,6 +2,7 @@ process.env.NTBA_FIX_319 = 'test';
 const { startBot, say, check } = require('../bot');
 let lastRequest = null;
 const express = require('express');
+const cron = require("node-cron");
 const app = express();
 app.use(express.json());
 const timeoutThreshold = 4000; // 10 seconds
