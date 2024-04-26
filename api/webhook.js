@@ -31,6 +31,7 @@ module.exports = async (request, response) => {
 		}
 		const test_trigger = request.body.from_trig;
 		console.log("HERE IT IS" + test_trigger)
+		//weg
 		if (test_trigger === true) {
 			console.log('Triggered manually for testing:');
 			await check(lastRequest)
