@@ -37,11 +37,11 @@ let lastRequest = null;
 async function waitUntil(condition) {
 	return await new Promise(resolve => {
 		const interval = setInterval(async () => {
+			await say(lastRequest)
 			if (condition) {
-				await say(lastRequest)
 				clearInterval(interval);
 			};
-		}, 1000);
+		}, 4000);
 	});
 }
 module.exports = async (request, response) => {
@@ -51,7 +51,8 @@ module.exports = async (request, response) => {
 
 		await startBot(request);
 		await say(request);  // Direct reply	}
-		let timerId = setInterval(await say(request), 2000);
+		//let timerId = setInterval(await say(request), 2000);
+		waitUntil(lastRequest == null)
 	}
 	catch (error) {
 		console.error('Error sending message');
