@@ -34,25 +34,25 @@ let lastRequest = null;
 });
 */
 //job.start();
-async function waitUntil(condition, timeout = 30000) {
-	return new Promise((resolve, reject) => {
+const timeoutThreshold = 10000; // 10 seconds
+async function waitUntil(condition) {
+	return await new Promise(resolve => {
 		const interval = setInterval(() => {
 			say(lastRequest)
-			if (condition()) {
+			if (condition) {
 				clearInterval(interval);
-				resolve();
-			}
+			};
 		}, 4000);
-
-		setTimeout(async () => {
-			clearInterval(interval);
-			await waitUntil(lastRequest)
-			reject(new Error('waitUntil timeout reached'));
-		}, timeout);
 	});
 }
 module.exports = async (request, response) => {
+	const timer = setTimeout(() => {
+		console.log('Preemptive response to avoid 504 Timeout');
+		response.status(202).send('Processing...'); // Respond with 202 Accepted as processing continues
+	}, timeoutThreshold);
+
 	try {
+
 		// Store the chat ID and message
 		lastRequest = request;
 
