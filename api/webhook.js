@@ -1,6 +1,9 @@
 process.env.NTBA_FIX_319 = 'test';
 const { startBot, say } = require('../bot');
 let lastRequest = null;
+const express = require('express');
+const app = express();
+app.use(express.json());
 const timeoutThreshold = 4000; // 10 seconds
 async function waitUntil(condition) {
 	return await new Promise(resolve => {
@@ -13,14 +16,31 @@ async function waitUntil(condition) {
 	});
 }
 
+app.post('/api/webhook', async (req, res) => {
+	const { test_trigger, message } = req.body;
+
+	if (test_trigger) {
+		console.log('Received a test webhook trigger:', message);
+		await say(lastRequest)
+		// Handle test logic or respond differently
+		res.status(200).send('Test webhook processed successfully.');
+	} else {
+		console.log('Received a real Telegram message:', message);
+		// Process the message as you would in production
+		res.status(200).send('Telegram webhook processed successfully.');
+	}
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+	console.log(`Server is running on port ${PORT}`);
+});
+
 module.exports = async (request, response) => {
 	try {
-		console.log(request)
-		const triggeredFrom = request.body.source;
-		const timestamp = request.body.timestamp;
-		if (triggeredFrom === 'triggerNextRun') {
+		if (request.body.triggerSource && request.body.triggerSource === 'trig') {
+			console.log('Triggered manually for testing:');
 			await say(lastRequest)
-			console.log(`Function was triggered from ${triggeredFrom} at ${timestamp}.`);
 		} else {
 			lastRequest = request;
 			await startBot(request);

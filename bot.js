@@ -33,20 +33,38 @@ function delay(ms) {
 }
 async function triggerNextRun() {
 	setTimeout(async () => {
+		const webhookUrl = 'https://notement.vercel.app/api/webhook';
+		const data = {
+			update_id: 123456789,
+			test_trigger: true,  // Special flag to indicate this is a test trigger
+			message: {
+				message_id: 1,
+				from: {
+					id: 123456,
+					is_bot: false,
+					first_name: "John",
+					username: "john_doe"
+				},
+				chat: {
+					id: 123456,
+					first_name: "John",
+					username: "john_doe",
+					type: "private"
+				},
+				date: 1441645532,
+				text: "This is a simulated message to test webhook handling!"
+			}
+		};
 		try {
-			console.log("Triggering the next function run...");
-			// Define the data to send
-			const postData = {
-				triggered: true,
-				timestamp: new Date().toISOString(),  // Example: include a timestamp
-				source: 'triggerNextRun'  // Indicate the source of the trigger
-			};
+			const response = await axios.post(webhookUrl, data, {
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
 
-			// Call the function URL itself with POST data
-			const result = await axios.post('https://notement.vercel.app/api/webhook', postData);
-			console.log("Function re-triggered successfully:", result.data);
+			console.log('Webhook triggered successfully:', response.data);
 		} catch (error) {
-			console.error("Error re-triggering function:", error);
+			console.error('Failed to trigger webhook:', error);
 		}
 	}, 3000); // Delay for 60 seconds before re-invoking
 }
