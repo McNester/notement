@@ -34,14 +34,21 @@ let lastRequest = null;
 });
 */
 //job.start();
-async function waitUntil(condition) {
-	return await new Promise(resolve => {
+async function waitUntil(condition, timeout = 30000) {
+	return new Promise((resolve, reject) => {
 		const interval = setInterval(() => {
 			say(lastRequest)
-			if (condition) {
+			if (condition()) {
 				clearInterval(interval);
-			};
+				resolve();
+			}
 		}, 4000);
+
+		setTimeout(async () => {
+			clearInterval(interval);
+			await waitUntil(lastRequest)
+			reject(new Error('waitUntil timeout reached'));
+		}, timeout);
 	});
 }
 module.exports = async (request, response) => {
@@ -52,7 +59,7 @@ module.exports = async (request, response) => {
 		await startBot(request);
 		say(request);  // Direct reply	}
 		//let timerId = setInterval(await say(request), 2000);
-		waitUntil(lastRequest == null)
+		await waitUntil(lastRequest == null)
 	}
 	catch (error) {
 		console.error('Error sending message');
