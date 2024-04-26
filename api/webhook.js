@@ -1,6 +1,5 @@
 process.env.NTBA_FIX_319 = 'test';
 const { startBot, say } = require('../bot');
-const axios = require('axios'); // Ensure axios is installed via npm
 let lastRequest = null;
 const timeoutThreshold = 4000; // 10 seconds
 async function waitUntil(condition) {
@@ -16,6 +15,7 @@ async function waitUntil(condition) {
 
 module.exports = async (request, response) => {
 	try {
+		console.log(request)
 		const triggeredFrom = request.body.source;
 		const timestamp = request.body.timestamp;
 		if (triggeredFrom === 'triggerNextRun') {
